@@ -31,7 +31,7 @@ const drawScreen = {
     dvdLogo.img.onload = () => {
       this.interval = setInterval(drawLoop, 5);
     };
-    dvdLogo.img.src = "https://png.icons8.com/?id=31489&size=1600";
+    dvdLogo.img.src = "dvd-logo.png";
   },
   clear: function() {
     this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
@@ -57,12 +57,13 @@ const changeStatus = (isInPage) => {
   }
 }
 
-document.onmouseout = function() {
-  changeStatus(false);
-}
-
-document.onmousemove = function() {
-  changeStatus(true);
+window.onmouseout = function(e) {
+  if (!e.relatedTarget && !e.toElement) {
+    changeStatus(false);
+  }
+  else {
+    changeStatus(true);
+  }
 }
 
 const drawLoop = () => {
@@ -73,7 +74,7 @@ const drawLoop = () => {
     // }
     if (timer > 355) {
       drawScreen.ctx.drawImage(dvdLogo.img, dvdLogo.pos[0], dvdLogo.pos[1] - 50, 205, 205);
-      drawScreen.canvas.style.filter = "hue-rotate(" + timer + "deg)";
+      drawScreen.canvas.style.filter = "brightness(0.5) sepia(1) hue-rotate(" + timer + "deg)";
       dvdLogo.loop();
     }
   }
