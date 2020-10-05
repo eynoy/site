@@ -5,7 +5,7 @@ const dvdLogo = {
   loop: function() {
     this.pos[0] += this.vel[0];
     this.pos[1] += this.vel[1];
-    
+
     if (this.pos[0] <= 0 || this.pos[0] + 205 >= window.innerWidth) {
       this.vel[0] *= -1;
     }
@@ -20,13 +20,13 @@ const drawScreen = {
   start: function() {
     document.body.appendChild(this.canvas);
     this.canvas.style = "position: fixed; top: 0; left: 0;";
-    
+
     this.canvas.width = window.innerWidth;
     this.canvas.height = window.innerHeight;
-    
+
     this.ctx = this.canvas.getContext("2d");
     this.ctx.fillStyle = "white";
-    
+
     dvdLogo.img = new Image();
     dvdLogo.img.onload = () => {
       this.interval = setInterval(drawLoop, 5);
@@ -43,7 +43,7 @@ let onPage = true, timer = 0;
 const changeStatus = (isInPage) => {
   timer = 0;
   onPage = isInPage;
-  
+
   if (onPage) {
     drawScreen.canvas.width = 0;
     drawScreen.canvas.height = 0;
@@ -55,6 +55,14 @@ const changeStatus = (isInPage) => {
     drawScreen.ctx.fillStyle = "white";
     drawScreen.ctx.filter = `hue-rotate(${timer})`;
   }
+}
+
+document.onmouseout = function() {
+  changeStatus(false);
+}
+
+document.onmousemove = function() {
+  changeStatus(true);
 }
 
 const drawLoop = () => {
