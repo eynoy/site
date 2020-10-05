@@ -1,0 +1,21 @@
+@font-face {
+    font-family: 'IBM Plex Sans', cursive;
+    font-weight: normal;
+    font-style: normal;
+}
+
+body {
+  font-family: 'IBM Plex Sans', cursive;
+  background: #000020;
+  color: white;
+  padding: 1em;
+  margin: 0;
+}
+
+td {
+  height: 1px;
+}
+
+a {
+  color: #ff7f50;
+}

@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html>
+  <base target="_blank">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width">
+    <title>Coding Progress</title>
+    <meta name="theme-color">
+    <link href="https://fonts.googleapis.com/css?family=IBM+Plex+Sans:100,100i,400,400i,700,700i" rel="stylesheet">
+    <link href="style.css" rel="stylesheet" type="text/css">
+    <script src="script.js"></script>
+  </head>
+  <body onload="drawScreen.start()" onmouseover="changeStatus(true);" onmouseout="changeStatus(false);">
+    <div>
+    <h1><span style="color: #FFD700;">My Projects</span></h1>
+    <p>The following are most of my projects while programming, put all into one place so I don't lose track:</p>
+    <table style="width: 943px;" border="1">
+    <thead>
+    <tr>
+    <td style="width: 256px;"><strong>Name of the Project</strong></td>
+    <td style="width: 506px;"><strong>Description</strong></td>
+    <td style="width: 250px;"><strong>Written in:</strong></td>
+    <td style="width: 176px;"><strong>Link</strong></td>
+    <td style="width: 146px;"><strong>Source Link</strong></td>
+    <td style="width: 146px;"><strong>Status</strong></td>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+    <td style="width: 256px;">3D Snake</td>
+    <td style="width: 506px;"><small>Three different versions of the classic game snake. Made in pure WebGL.</small></td>
+    <td style="width: 146px;">Javascript (Browser)</td>
+    <td style="width: 176px;"><a href="https://snake.mumflrfumperdin.repl.co">Repl</a></td>
+    <td style="width: 146px;"><a href="https://repl.it/@MumflrFumperdin/snake">Repl Editor</a></td>
+    <td style="width: 146px;"><span style="color: #339966;">Completed</span></td>
+    </tr>
+    <tr>
+    <td style="width: 256px;">Terrain Generation</td>
+    <td style="width: 506px;"><small>A demonstration of understanding OpenSimplex noise while learning WebGL.</small></td>
+    <td style="width: 146px;">Javascript (Browser)</td>
+    <td style="width: 176px;"><a href="https://terrain-gen.mumflrfumperdin.repl.co">Repl</a></td>
+    <td style="width: 146px;"><a href="https://repl.it/@MumflrFumperdin/terrain-gen">Repl Editor</a></td>
+    <td style="width: 146px;"><span style="color: #339966;">Completed</span></td>
+    </tr>
+    <tr>
+    <td style="width: 256px;">Pathfinding and Maze Generation</td>
+    <td style="width: 506px;"><small>A visualization of some pathfinding and maze generation algorithms. Click on a circle to turn it into a wall. Ctrl-Click to make one into the beginning circle and Alt-Click to make one into the goal circle.</small></td>
+    <td style="width: 146px;">Javascript (Browser)</td>
+    <td style="width: 176px;"><a href="https://pathfinding.mumflrfumperdin.repl.co">Repl</a></td>
+    <td style="width: 146px;"><a href="https://repl.it/@MumflrFumperdin/Pathfinding">Repl Editor</a></td>
+    <td style="width: 146px;"><span style="color: #339966;">Completed</span></td>
+    </tr>
+    <tr>
+    <td style="width: 256px;">Harmonic Motion</td>
+    <td style="width: 506px;"><small>A project for my Physics class. Press any key to start/pause.</small></td>
+    <td style="width: 146px;">Javascript (Browser)</td>
+    <td style="width: 176px;"><a href="https://harmonicmotion.mumflrfumperdin.repl.co/">Repl</a></td>
+    <td style="width: 146px;"><a href="https://repl.it/@MumflrFumperdin/HarmonicMotion">Repl Editor</a></td>
+    <td style="width: 146px;"><span style="color: #339966;">Completed</span></td>
+    </tr>
+    <tr>
+    <td style="width: 256px;">Friction</td>
+    <td style="width: 506px;"><small>A project for my Physics class. Click to advance.</small></td>
+    <td style="width: 146px;">Javascript (Browser)</td>
+    <td style="width: 176px;"><a href="https://Friction.mumflrfumperdin.repl.co">Repl</a></td>
+    <td style="width: 146px;"><a href="https://repl.it/@MumflrFumperdin/Friction">Repl Editor</a></td>
+    <td style="width: 146px;"><span style="color: #339966;">Completed</span></td>
+    </tr>
+    <tr>
+    <td style="width: 256px;">Physics</td>
+      <td style="width: 506px;"><small>A website to demonstrate some principles of physics. Click on a section for it to start.</small></td>
+    <td style="width: 146px;">Javascript (Browser)</td>
+    <td style="width: 176px;"><a href="https://exp.mumflrfumperdin.repl.co/">Repl</a></td>
+    <td style="width: 146px;"><a href="https://repl.it/@MumflrFumperdin/exp">Repl Editor</a></td>
+    <td style="width: 146px;"><span style="color: #339966;">Completed</span></td>
+    </tr>
+    <tr>
+    <td style="width: 256px;">Cycloids</td>
+      <td style="width: 506px;"><small>A website to visualize cycloids. Press Space to show details.</small></td>
+    <td style="width: 146px;">Javascript (Browser)</td>
+    <td style="width: 176px;"><a href="https://cycloids.mumflrfumperdin.repl.co/">Repl</a></td>
+    <td style="width: 146px;"><a href="https://repl.it/@MumflrFumperdin/Cycloids">Repl Editor</a></td>
+    <td style="width: 146px;"><span style="color: #339966;">Completed</span></td>
+    </tr>
+    <tr>
+    <td style="width: 256px;">Visualization of the Mandelbrot Set</td>
+      <td style="width: 506px;"><small>A visualization of the Mandelbrot Set using the <a href="https://github.com/gpujs/gpu.js">gpu.js library</a> to create GPU accelerated functions.</small></td>
+    <td style="width: 146px;">Javascript (Browser)</td>
+    <td style="width: 176px;"><a href="https://mandelbrot.mumflrfumperdin.repl.co/">Repl</a></td>
+    <td style="width: 146px;"><a href="https://repl.it/@MumflrFumperdin/Mandelbrot">Repl Editor</a></td>
+    <td style="width: 146px;"><span style="color: #339966;">Completed</span></td>
+    </tr>
+    <tr>
+    <td style="width: 256px;">olcPGE for Mac</td>
+    <td style="width: 506px;"><small>A port of a simple window graphics library to Mac. The original developer added this to the official library.</small></td>
+    <td style="width: 146px;">C++</td>
+    <td style="width: 176px;"><a href="https://github.com/MumflrFumperdink/olcPGEMac">Github</a></td>
+    <td style="width: 146px;">Same as link</td>
+    <td style="width: 146px;"><span style="color: #339966;">Completed</span></td>
+    </tr>
+    <tr>
+    <td style="width: 256px;">olcCGE for Mac</td>
+    <td style="width: 506px;"><small>A port of a console graphics library to Mac.</small></td>
+    <td style="width: 146px;">C++</td>
+    <td style="width: 176px;"><a href="https://github.com/MumflrFumperdink/olcCGEMac">Github</a></td>
+    <td style="width: 146px;">Same as link</td>
+    <td style="width: 146px;"><span style="color: #339966;">Completed</span></td>
+    </tr>
+    <tr>
+    <td style="width: 256px;">Assonance and<br>Consonance</td>
+    <td style="width: 506px;"><small>An application that finds repeated consonant or vowel sounds in a block of English text using the International Phonetic Alphabet.</small></td>
+    <td style="width: 146px;">Javascript (Browser)</td>
+    <td style="width: 176px;"><a href="https://analyze-text.mumflrfumperdin.repl.co">Repl</a></td>
+    <td style="width: 146px;"><a href="https://repl.it/@MumflrFumperdin/Analyze-Text">Repl Editor</a></td>
+    <td style="width: 146px;"><span style="color: #339966;">Completed</span></td>
+    </tr>
+    <tr>
+    <td style="width: 256px;">Gravity Sim</td>
+    <td style="width: 506px;"><small>An early simulation of Newtonian gravity between two objects.</small></td>
+    <td style="width: 146px;">Java</td>
+    <td style="width: 176px;"><a href="https://cdn.glitch.com/fc72785e-f2e2-4537-85a0-b20b5854dfb3%2FGravity.jar?v=1565663135077">Jar File</a></td>
+    <td style="width: 146px;">None</td>
+    <td style="width: 146px;"><span style="color: #339966;">Completed</span></td>
+    </tr>
+    <tr>
+    <td style="width: 256px;">EY-84</td>
+    <td style="width: 506px;"><small>An early program which emulates a simple graphing calculator (press escape to change modes).</small></td>
+    <td style="width: 146px;">Java</td>
+    <td style="width: 176px;"><a href="https://cdn.glitch.com/fc72785e-f2e2-4537-85a0-b20b5854dfb3%2FEY-84.jar?v=1565935518552">Jar File</a></td>
+    <td style="width: 146px;">None</td>
+    <td style="width: 146px;"><span style="color: #339966;">Completed</span></td>
+    </tr>
+    <tr>
+    <td style="width: 256px;">Raycasting Textured<br>Walls and Floors</td>
+    <td style="width: 506px;"><small>A program using raycasting in order to create a pseudo-3d environment.</small></td>
+    <td style="width: 146px;">Javascript (Browser)</td>
+    <td style="width: 176px;"><a href="https://Raycasting.mumflrfumperdin.repl.co">Repl</a></td>
+    <td style="width: 146px;"><a href="https://repl.it/@MumflrFumperdin/Raycasting">Repl Editor</a></td>
+    <td style="width: 146px;"><span style="color: #339966;">Completed</span></td>
+    </tr>
+    <tr>
+    <td style="width: 256px;">Puzzle Game</td>
+    <td style="width: 506px;"><small>A low-pixel game to test cutscene sequencing and game mechanics. Press on the castle to start.</small></td>
+    <td style="width: 146px;">Javascript (Browser)</td>
+    <td style="width: 176px;"><a href="https://Puzzle.mumflrfumperdin.repl.co">Repl</a></td>
+    <td style="width: 146px;"><a href="https://repl.it/@MumflrFumperdin/Puzzle">Repl Editor</a></td>
+    <td style="width: 146px;"><span style="color: #ffff00;">In Progress</span></td>
+    </tr>
+    </tbody>
+    </table>
+
+    <small>
+    <br><br>
+    (Try to move your mouse cursor off of this page)<br>
+    Eyal N.
+    </small>
+    </div>
+  </body>
+</html>
