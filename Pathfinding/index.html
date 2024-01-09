@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width">
+    <title>Pathfinding Algorithms</title>
+    <link href="style.css" rel="stylesheet" type="text/css" />
+    <link href="https://fonts.googleapis.com/css?family=Inconsolata&display=swap" rel="stylesheet">
+    <script src="js/other.js"></script>
+    <script src="js/structs.js"></script>
+    <script src="js/board.js"></script>
+    <script src="js/main.js"></script>
+    <script src="js/script.js"></script>
+  </head>
+  <body onload="drawScreen.start()">
+    <div id="notCanvas">
+      <h1>Pathfinding Algorithms and Maze Generation</h1>
+      <select id = "pathList">
+        <option value = "1">Dijkstra's algorithm</option>
+        <option value = "2">Dijkstra's (early)</option>
+        <option value = "3">A*</option>
+        <option value = "4">A* (early)</option>
+      </select>
+      <button onclick="algoType = parseInt(document.getElementById('pathList').value)">Pathfind!</button>
+      <select id = "mazeList">
+        <option value = "1">Depth-First Search</option>
+        <option value = "2">Randomized Prim's algorithm</option>
+      </select>
+      <button onclick="mazeAlgo = parseInt(document.getElementById('mazeList').value); constructingMaze = true; board.beginMaze();">Generate Maze</button>
+      <button class="clearer" onclick="board.reset(); board.clear()">Clear</button>
+    </div>
+    <canvas id="drawScren"></canvas>
+  </body>
+</html>

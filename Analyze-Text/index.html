@@ -1,0 +1,67 @@
+<html lang="en">
+
+<head>
+  <link href="style.css" rel="stylesheet" type="text/css" />
+  <meta charset="utf-8">
+
+  <title>Finding Patterns</title>
+
+</head>
+
+<body>
+  <!-- Load in the scripts first -->
+  <script src="lib/text-to-ipa.js"></script>
+  <script src="lib/converter-form.js"></script>
+  <script src="script.js"></script>
+
+  <!-- Load dictionary on window load, you may want to change this according to your needs.
+  To demonstrate this program, it's just done on window load though.
+  NOTE: This program implies that the CMU IPA dictionary (http://people.umass.edu/nconstan/CMU-IPA/)
+  has been loaded with loadDict(). This dictionary is by default included with this
+  program under the name 'ipadict.txt'. This _WILL NOT WORK_ with any other IPA dictionary.
+  -->
+
+  <p>Use the following text areas to find repeated sounds in a text.</p>
+  <p>This is still being tested, so please forgive mistakes such as underlining the wrong letter</p>
+  <br />
+  <h3>Be aware that there can be differences in pronounciation depending on accent, environment, and more (especially with vowels). Use this as a guide, make sure all the examples work before you use them.</h3>
+  
+  <!-- Create a form div -->
+  <div id="js-text-to-ipa-form">
+
+    <ul style="list-style-type: none;">
+      <!-- ipa-in is the designated ID to determine where text will be input from -->
+      <li><textarea id="ipa-in" placeholder="Write text here" rows="4" cols="50"></textarea></li>
+      
+      <!-- This submit button runs the conversion on the input text
+      As you can see, when this buton is pressed, the conver() function is ran
+      where the input, output, and error IDs are given as parameters.
+      These can be set to whatever you like, as long as inID and outID are text areas, and errID is a div.
+      -->
+      <li class="button"><button type="button" id="js-ipa-submit" onClick="convertToIPA()">Find Patterns!</button></li>
+      <!-- ipa-out is the designated ID to determine where the converted text will be output to -->
+      <li><textarea readonly id="ipa-out" placeholder="aʊtpʊt gəʊz hɪə" rows="4" cols="50"></textarea></li>
+
+    </ul>
+
+    <ul style="list-style-type: none;">
+      <li><noscript><p>This converter will not work unless Javascript is enabled.</p></noscript></li>
+      <li>
+        <!-- ipa-err is the designated ID to determine where any errors with the translation will go -->
+        <div id="ipa-err">
+          <p>Errors will go here if you make any. (This will be overwritten)</p>
+        </div>
+      </li>
+    </ul>
+
+  </div>
+
+  <text id="ending"> </text>
+  <small>Made by E.N.<br>Using a (modified) library from <a href="https://github.com/surrsurus/text-to-ipa" target="_blank">surrsurus on Github</a></small>
+</body>
+
+<script>
+  window.onload = onLoadPage();
+</script>
+
+</html>

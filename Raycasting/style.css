@@ -1,0 +1,15 @@
+@font-face {
+    font-family: 'IBM Plex Sans', cursive;
+    font-weight: normal;
+    font-style: normal;
+
+}
+
+body {
+  margin: 0;
+  overflow: hidden;
+}
+
+#gameScreen {
+  background: black;
+}

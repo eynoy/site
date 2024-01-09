@@ -1,0 +1,12 @@
+body {
+  margin: 0;
+  overflow: hidden;
+}
+
+.srcing {
+  position: absolute;
+  left: 690px;
+  top: 140px;
+  visibility: hidden;
+  font-family: Roboto;
+}

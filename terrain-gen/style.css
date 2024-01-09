@@ -1,0 +1,11 @@
+body {
+  margin: 0;
+  overflow: hidden;
+}
+
+.hud {
+  position: absolute;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  left: 20px;
+  top: 10px;
+}
