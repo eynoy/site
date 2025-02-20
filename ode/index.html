@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width">
+    <title>ODE Visualization</title>
+    <link href="style.css" rel="stylesheet" type="text/css" />
+
+    <!-- include libraries -->
+    <script src="https://cdn.jsdelivr.net/npm/d3@7"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@observablehq/plot@0.6"></script>
+    <script src="https://cdn.jsdelivr.net/npm/d3-fetch@3.0.1/dist/d3-fetch.min.js"></script>
+  </head>
+  <body onload="mainScreen()">
+    <div id=graphDiv></div>
+    <div id="inputDiv">
+      <main>
+        <h2>Autonomous 1st Order ODEs</h2>
+        Welcome! This is a demo of how flows work in ODEs. This section deals with autonomous 1st Order ODEs. Please input your desired ODE below:
+        <br>
+        <br>
+        <br>
+        x'(x, y) = <input id="x_deriv_input" placeholder="time derivative of x" value="-y*y"></input><br>
+        y'(x, y) = <input id="y_deriv_input" placeholder="time derivative of y" value="x-0.3*y"></input><br>
+        <br>
+        <button id="submitButton" onclick="updateCanvas()">Update Dynamics</button>
+        <br>
+        <br>
+        <br>
+        Interesting Systems to try: <br>
+        1) x' = -y*sin(x), y' = x-0.3*y <br>
+        2) x' = y, y' = -0.5*sin(x)-0.1*y <br> (Dampened Pendulum with x=x, y=x_dot) <br>
+      </main>
+    </div>
+    <script src="js/helpers.js"></script>
+    <script src="js/flow2D.js"></script>
+    <script src="js/script.js"></script>
+  </body>
+</html>

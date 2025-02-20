@@ -1,0 +1,32 @@
+body {
+  margin: 0;
+  overflow: hidden;
+  background-color: white;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  resize: none;
+}
+
+canvas {
+  position: absolute;
+}
+
+figure {
+  display: inline-block;
+}
+
+#graphDiv {
+  display: inline-block grid;
+  float: left;
+  overflow: auto;
+}
+
+#inputDiv {
+  display: inline-block;
+  position: absolute;
+}
+
+main {
+  padding-top: 20px;
+  padding-right: 20px;
+  vertical-align: text-top;
+}
