@@ -1,6 +1,6 @@
 let ctx;
 
-const plotBBox = {min_x: -10, max_x: 10, min_y: -5, max_y: 5};
+const plotBBox = {min_x: -10, max_x: 10, min_y: -6, max_y: 6};
 const pixelBBox = {min_x: -1, max_x: -1, min_y: -1, max_y: -1};
 
 const createPlot = (vectorField) => {

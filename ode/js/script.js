@@ -8,8 +8,8 @@ const dt = 0.010;
 let currentDiffEqX = (x, y) => -y*y;
 let currentDiffEqY = (x, y) => x-0.3*y;
 
-const canvasWidth = 800;
-const canvasHeight = 800;
+const canvasWidth = 900;
+const canvasHeight = 600;
 const numPixelsApart = 30;
 const createVectorField = (min_x, max_x, min_y, max_y, firstOrderDiffEqX, firstOrderDiffEqY) => {
   let rows = canvasHeight / numPixelsApart;
@@ -56,8 +56,8 @@ const mainScreen = async () => {
   const drawing_canvas = document.createElement("canvas");
   drawing_canvas.width = plot_boundbox.width;
   drawing_canvas.height = plot_boundbox.height;
-  drawing_canvas.style.left = (plot_boundbox.x + 7) + "px";
-  drawing_canvas.style.top = (plot_boundbox.y - 7) + "px";
+  drawing_canvas.style.left = (plot_boundbox.x) + "px";
+  drawing_canvas.style.top = (plot_boundbox.y) + "px";
 
   pixelBBox.min_x = 0;
   pixelBBox.min_y = 0;
@@ -156,15 +156,27 @@ const createFlowArray = () => {
     potentialStartPointsPointingIntoScreen.push(isPointingLeft);
   }
 
-  console.log(potentialStartPointsX);
-  console.log(potentialStartPointsY);
-  console.log(potentialStartPointsPointingIntoScreen);
-
   // Add in apropriate flows
+  let numFlowPts = 0;
   for (let i = 0; i < potentialStartPointsX.length; i++) {
     if (potentialStartPointsPointingIntoScreen[i]) {
       const currentFlow = new Flow2D(potentialStartPointsX[i],
                              potentialStartPointsY[i],
+                             currentDiffEqX,
+                             currentDiffEqY,
+                             dt,
+                             "black",
+                             precalcFlows);
+      currentFlows.push(currentFlow);
+
+      numFlowPts++;
+    }
+  }
+
+  if (numFlowPts == 0) {
+    for (let i = 0; i < 100; i++) {
+      const currentFlow = new Flow2D(0.1*cos(2 * Math.PI * i / 100.0),
+                             0.1*sin(2 * Math.PI * i / 100.0),
                              currentDiffEqX,
                              currentDiffEqY,
                              dt,
