@@ -23,8 +23,12 @@
         x'(x, y) = <input id="x_deriv_input" placeholder="time derivative of x" value="-y*y"></input><br>
         y'(x, y) = <input id="y_deriv_input" placeholder="time derivative of y" value="x-0.3*y"></input><br>
         <br>
-        <button id="submitButton" onclick="updateCanvas()">Update Dynamics</button>
+        <button id="submitButton" onclick="resetVectorField()">Update Dynamics / Reset Flows</button>
         <br>
+        <input type="checkbox" id="precalcFlowButton" onclick="precalcFlows = !precalcFlows">Precalculate Flows</input>
+        <br>
+        <br>
+        <button id="flowArrayButton" onclick="createFlowArray()">Create Automatic Flow Array</button>
         <br>
         <br>
         Interesting Systems to try: <br>
