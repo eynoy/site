@@ -10,6 +10,7 @@ class Flow2D {
 
 		this.firstOrderDiffEqX = firstOrderDiffEqX;
 		this.firstOrderDiffEqY = firstOrderDiffEqY;
+		this.vels = [mag(firstOrderDiffEqX(initialX, initialY), firstOrderDiffEqY(initialX, initialY))]
 
 		this.dt = dt;
 		this.color = color;
@@ -17,11 +18,16 @@ class Flow2D {
 
 		if (this.preCalculateFlows) {
 			for (let i = 0; i < numIterations; i++) {
+				if (this.currentPositionIndex >= 1 && !plotBBox.contains(this.flowX[this.currentPositionIndex], this.flowY[this.currentPositionIndex])) {
+					break;
+				}
+
 				this.calculateNextFlowState();
 			}
 		}
 
 		this.currentPositionIndex = 0;
+		this.flowing = true;
 	}
 
 	calculateNextFlowState() {
@@ -32,22 +38,29 @@ class Flow2D {
 
 		this.flowX.push(nextX);
 		this.flowY.push(nextY);
+		this.vels.push(mag(this.firstOrderDiffEqX(nextX, nextY), this.firstOrderDiffEqY(nextX, nextY)));
 	}
 
 	update() {
-		if (!this.preCalculateFlows) this.calculateNextFlowState();
+		if (!this.flowing) return;
 
-		if (this.currentPositionIndex < numIterations - 1) {
-			this.currentPositionIndex++;
+		if (this.currentPositionIndex >= numIterations) {
+			this.flowing = false;
+			return;
 		}
-		else {
-			console.log("!sx");
+
+		if (this.currentPositionIndex >= 1 && !plotBBox.contains(this.flowX[this.currentPositionIndex], this.flowY[this.currentPositionIndex])) {
+			this.flowing = false;
+			return;
 		}
+
+		if (!this.preCalculateFlows) this.calculateNextFlowState();
+		this.currentPositionIndex++;
 	}
 
 	draw() {
-		drawPlotCoordCurve(this.flowX, this.flowY, this.color);
+		drawPlotCoordCurve(this.flowX, this.flowY, this.vels, this.color);
 		drawCircle(this.initialX, this.initialY, 2, "Red");
-		drawCircle(this.flowX[this.currentPositionIndex], this.flowY[this.currentPositionIndex], 4, this.color);
+		if (this.flowing) drawCircle(this.flowX[this.currentPositionIndex], this.flowY[this.currentPositionIndex], 4, this.color);
 	}
 }

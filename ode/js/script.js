@@ -63,6 +63,7 @@ const mainScreen = async () => {
   pixelBBox.min_y = 0;
   pixelBBox.max_x = plot_boundbox.width;
   pixelBBox.max_y = plot_boundbox.height;
+  pixelBBox.diag_len = mag(pixelBBox.max_x - pixelBBox.min_x, pixelBBox.max_y - pixelBBox.min_y);
 
   document.body.append(drawing_canvas);
 
@@ -185,6 +186,8 @@ const createFlowArray = () => {
       currentFlows.push(currentFlow);
     }
   }
+
+  console.log(currentFlows.length);
 };
 
 
