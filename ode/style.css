@@ -48,8 +48,13 @@ figure {
 }
 
 .mainStyle {
+  position: relative;
   padding-top: 20px;
   padding-right: 20px;
   vertical-align: text-top;
   display: grid;
+}
+
+.interactiveSection {
+  position: relative;
 }

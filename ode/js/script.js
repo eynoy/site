@@ -57,13 +57,14 @@ const mainScreen = async () => {
   div.style.width = canvasWidth + "px";
 
   const plot_boundbox = document.querySelectorAll('[aria-label="vector"]')[0].getBoundingClientRect();
+  const plot_surroundDiv_boundbox = document.getElementsByClassName('interactiveSection')[0].getBoundingClientRect();
 
   const drawing_canvas_div = document.getElementById("canvasDiv");
   const drawing_canvas = document.createElement("canvas");
   drawing_canvas.width = drawing_canvas.width = plot_boundbox.width;
   drawing_canvas.height = plot_boundbox.height;
-  drawing_canvas_div.style.left = (plot_boundbox.x) + "px";
-  drawing_canvas_div.style.top = (plot_boundbox.y) + "px";
+  drawing_canvas_div.style.left = (plot_boundbox.x - plot_surroundDiv_boundbox.x) + "px";
+  drawing_canvas_div.style.top = (plot_boundbox.y - plot_surroundDiv_boundbox.y) + "px";
 
   pixelBBox.min_x = 0;
   pixelBBox.min_y = 0;
