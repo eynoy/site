@@ -1,17 +1,26 @@
 body {
-  margin: 0;
-  overflow: hidden;
   background-color: white;
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-  resize: none;
 }
 
-canvas {
+#canvasDiv {
   position: absolute;
 }
 
 figure {
   display: inline-block;
+  margin: 10px;
+}
+
+.horzSection {
+  margin: 0;
+  overflow: hidden;
+}
+
+.backText {
+  padding-left: 2%;
+  padding-right: 2%;
+  overflow: auto;
 }
 
 #graphDiv {
@@ -22,11 +31,25 @@ figure {
 
 #inputDiv {
   display: inline-block;
-  position: absolute;
+  background-color: #F5E4D7;
+  overflow-y: scroll;
+  padding: 10px;
 }
 
-main {
+.premadeChoices {
+  overflow-y: scroll;
+  background-color: #BFD1E5;
+  padding: 10px;
+
+}
+
+.inputText {
+  width: 40%;
+}
+
+.mainStyle {
   padding-top: 20px;
   padding-right: 20px;
   vertical-align: text-top;
+  display: grid;
 }

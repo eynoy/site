@@ -8,8 +8,8 @@ const dt = 0.010;
 let currentDiffEqX = (x, y) => -y*y;
 let currentDiffEqY = (x, y) => x-0.3*y;
 
-const canvasWidth = 900;
-const canvasHeight = 600;
+let canvasWidth = 900;
+let canvasHeight = 600;
 const numPixelsApart = 30;
 const createVectorField = (min_x, max_x, min_y, max_y, firstOrderDiffEqX, firstOrderDiffEqY) => {
   let rows = canvasHeight / numPixelsApart;
@@ -36,6 +36,11 @@ const createVectorField = (min_x, max_x, min_y, max_y, firstOrderDiffEqX, firstO
 };
 
 const mainScreen = async () => {
+  canvasWidth = Math.floor(document.body.scrollWidth * 0.60);
+  canvasHeight = Math.floor(canvasWidth * 0.66);
+
+  document.getElementsByClassName("mainStyle")[0].style.height = canvasHeight + "px";
+
   const vectorField = createVectorField(plotBBox.min_x,
                                          plotBBox.max_x,
                                          plotBBox.min_y,
@@ -53,11 +58,12 @@ const mainScreen = async () => {
 
   const plot_boundbox = document.querySelectorAll('[aria-label="vector"]')[0].getBoundingClientRect();
 
+  const drawing_canvas_div = document.getElementById("canvasDiv");
   const drawing_canvas = document.createElement("canvas");
-  drawing_canvas.width = plot_boundbox.width;
+  drawing_canvas.width = drawing_canvas.width = plot_boundbox.width;
   drawing_canvas.height = plot_boundbox.height;
-  drawing_canvas.style.left = (plot_boundbox.x) + "px";
-  drawing_canvas.style.top = (plot_boundbox.y) + "px";
+  drawing_canvas_div.style.left = (plot_boundbox.x) + "px";
+  drawing_canvas_div.style.top = (plot_boundbox.y) + "px";
 
   pixelBBox.min_x = 0;
   pixelBBox.min_y = 0;
@@ -65,7 +71,7 @@ const mainScreen = async () => {
   pixelBBox.max_y = plot_boundbox.height;
   pixelBBox.diag_len = mag(pixelBBox.max_x - pixelBBox.min_x, pixelBBox.max_y - pixelBBox.min_y);
 
-  document.body.append(drawing_canvas);
+  drawing_canvas_div.append(drawing_canvas);
 
   ctx = drawing_canvas.getContext("2d");
   ctx.lineWidth = 1;

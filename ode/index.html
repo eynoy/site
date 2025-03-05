@@ -12,67 +12,83 @@
     <script src="https://cdn.jsdelivr.net/npm/d3-fetch@3.0.1/dist/d3-fetch.min.js"></script>
   </head>
   <body onload="mainScreen()">
-    <div id=graphDiv></div>
-    <div id="inputDiv">
-      <main>
-        <h2>Autonomous 1st Order 2D ODEs</h2>
-        Welcome! This is a demo of how flows work in ODEs. This section deals with autonomous ODEs (no t dependence for x' and y'). Please input your desired ODE below! Then you can click any point on the graph to begin a flow, or click the "Automatic Flow Array" button below to get an automated generation of flows. Also check out the preset ODEs below by clicking the number on their left:
-        <br>
-        <br>
-        <br>
-        x'(x, y) = <input id="x_deriv_input" placeholder="time derivative of x" value="-y*y"></input><br>
-        y'(x, y) = <input id="y_deriv_input" placeholder="time derivative of y" value="x-0.3*y"></input><br>
-        <br>
-        <button id="submitButton" onclick="resetVectorField()">Update Dynamics / Clear Flows</button>
-        <br>
-        <input type="checkbox" id="precalcFlowButton" onclick="precalcFlows = !precalcFlows">Precalculate Flows</input>
-        <br>
-        <br>
-        <button id="flowArrayButton" onclick="createFlowArray()">Create Automatic Flow Array</button>
-        <br>
 
-        <br>
-        Canonical Linear Systems to try: <br>
+    <div class="horzSection">
+      <div class="backText"><h2>Autonomous 1st Order 2D ODEs</h2>
+          Welcome! This is a demo of how flows work in ODEs. This section deals with autonomous ODEs (no t dependence for x' and y'). Please input your desired ODE below! Then you can click any point on the graph to begin a flow, or click the "Automatic Flow Array" button below to get an automated generation of flows. Also check out the preset ODEs below by clicking the number on their left:
+          <br></div>
+      <div id=graphDiv></div>
 
-        <button onclick="document.getElementById('x_deriv_input').value = '-y';
-                         document.getElementById('y_deriv_input').value = 'x'
-                         resetVectorField()">1</button> x' = -y, &ensp; y' = x &nbsp;&emsp;&emsp;&emsp; (CCW Center) <br>
+      <main class="mainStyle">
+        <div id="inputDiv">
+          x'(x, y) = <input id="x_deriv_input" class="inputText" placeholder="time derivative of x" value="-y*y"></input><br>
+          y'(x, y) = <input id="y_deriv_input" class="inputText" placeholder="time derivative of y" value="x-0.3*y"></input><br>
+          <br>
+          <button id="submitButton" onclick="resetVectorField()">Update Dynamics / Clear Flows</button>
+          <br>
+          <input type="checkbox" id="precalcFlowButton" onclick="precalcFlows = !precalcFlows">Precalculate Flows</input>
+          <br>
+          <br>
+          <button id="flowArrayButton" onclick="createFlowArray()">Create Automatic Flow Array</button>
+        </div>
 
-        <button onclick="document.getElementById('x_deriv_input').value = 'y';
-                         document.getElementById('y_deriv_input').value = '-x-0.5*y'
-                         resetVectorField()">2</button> x' = y, &ensp; y' = -x-0.5*y &ensp; (CW Sprial Sink) <br>
+        <div class="premadeChoices">
+          <strong>Canonical Linear Systems to try:</strong> <br>
 
-        <button onclick="document.getElementById('x_deriv_input').value = 'x';
-                         document.getElementById('y_deriv_input').value = '0.5*y'
-                         resetVectorField()">3</button> x' = x, &ensp; y' = 0.5*y &emsp;&ensp; (Real Source) <br>
+          <button onclick="document.getElementById('x_deriv_input').value = '-y';
+                           document.getElementById('y_deriv_input').value = 'x'
+                           resetVectorField()">1</button> x' = -y, &ensp; y' = x &nbsp;&emsp;&emsp;&emsp; (CCW Center) <br>
 
-        <button onclick="document.getElementById('x_deriv_input').value = '-x';
-                         document.getElementById('y_deriv_input').value = '-0.5*y'
-                         resetVectorField()">4</button> x' = -x, &ensp; y' = -0.5*y &ensp;&ensp; (Real Sink) <br>
+          <button onclick="document.getElementById('x_deriv_input').value = 'y';
+                           document.getElementById('y_deriv_input').value = '-x-0.5*y'
+                           resetVectorField()">2</button> x' = y, &ensp; y' = -x-0.5*y &ensp; (CW Sprial Sink) <br>
 
-        <button onclick="document.getElementById('x_deriv_input').value = '-x';
-                         document.getElementById('y_deriv_input').value = '0.5*y'
-                         resetVectorField()">5</button> x' = -x, &ensp; y' = 0.5*y &emsp;&ensp; (Real Saddle) <br>
+          <button onclick="document.getElementById('x_deriv_input').value = 'x';
+                           document.getElementById('y_deriv_input').value = '0.5*y'
+                           resetVectorField()">3</button> x' = x, &ensp; y' = 0.5*y &emsp;&ensp; (Real Source) <br>
 
-        <br>
-        Interesting Nonlinear Systems to try: <br>
-        <button onclick="document.getElementById('x_deriv_input').value = '-y*y';
-                         document.getElementById('y_deriv_input').value = 'x-0.3*y'
-                         resetVectorField()">1</button> x' = -y*y, &emsp;&emsp;&ensp; y' = x-0.3*y <br>
+          <button onclick="document.getElementById('x_deriv_input').value = '-x';
+                           document.getElementById('y_deriv_input').value = '-0.5*y'
+                           resetVectorField()">4</button> x' = -x, &ensp; y' = -0.5*y &ensp;&ensp; (Real Sink) <br>
 
-        <button onclick="document.getElementById('x_deriv_input').value = '-y*cos(x)';
-                         document.getElementById('y_deriv_input').value = 'x-0.3*y'
-                         resetVectorField()">2</button> x' = -y*cos(x), &ensp; y' = x-0.3*y <br>
+          <button onclick="document.getElementById('x_deriv_input').value = '-x';
+                           document.getElementById('y_deriv_input').value = '0.5*y'
+                           resetVectorField()">5</button> x' = -x, &ensp; y' = 0.5*y &emsp;&ensp; (Real Saddle) <br>
 
-        <button onclick="document.getElementById('x_deriv_input').value = 'y';
-                         document.getElementById('y_deriv_input').value = '-0.5*sin(x)-0.1*y'
-                         resetVectorField()">3</button> x' = y, &emsp;&emsp;&emsp;&emsp; y' = -0.5*sin(x)-0.1*y (Dampened Pendulum: x=𝜃, y=d𝜃/dt) <br>
+          <br>
+          <strong>Interesting Nonlinear Systems to try:</strong> <br>
+          <button onclick="document.getElementById('x_deriv_input').value = '-y*y';
+                           document.getElementById('y_deriv_input').value = 'x-0.3*y'
+                           resetVectorField()">1</button> x' = -y*y <br>&emsp;&ensp; y' = x-0.3*y <br><br>
 
-        <button onclick="document.getElementById('x_deriv_input').value = '-y';
-                         document.getElementById('y_deriv_input').value = 'x-0.3*y*y'
-                         resetVectorField()">4</button> x' = -y, &emsp;&emsp;&emsp;&ensp; y' = x-0.3*y*y &emsp;&emsp;&emsp;&ensp;("Guitar pick")<br>
+          <button onclick="document.getElementById('x_deriv_input').value = '-y*cos(x)';
+                           document.getElementById('y_deriv_input').value = 'x-0.3*y'
+                           resetVectorField()">2</button> x' = -y*cos(x) <br>&emsp;&ensp; y' = x-0.3*y <br><br>
+
+          <button onclick="document.getElementById('x_deriv_input').value = 'y';
+                           document.getElementById('y_deriv_input').value = '-0.5*sin(x)-0.1*y'
+                           resetVectorField()">3</button> x' = y, <br>&emsp;&ensp;  y' = -0.5*sin(x)-0.1*y (Dampened Pendulum: x=𝜃, y=d𝜃/dt) <br><br>
+
+          <button onclick="document.getElementById('x_deriv_input').value = '-y';
+                           document.getElementById('y_deriv_input').value = 'x-0.3*y*y'
+                           resetVectorField()">4</button> x' = -y <br>&emsp;&ensp;  y' = x-0.3*y*y &emsp;&emsp;&emsp;&ensp;("Guitar pick")<br><br>
+
+          <button onclick="document.getElementById('x_deriv_input').value = '4*x-y-0.5*(x*x*x+y*y*x)';
+                           document.getElementById('y_deriv_input').value = 'x+4*y-0.5*(y*y*y+x*x*y)'
+                           resetVectorField()">5</button> r'=r(4−r*r)/2 <br>&emsp;&ensp; 𝜃'=1 &emsp;&emsp;&emsp;&ensp;(x'=4x-y-½(x³+y²*x), y'=x+4y-½(y³+x²*y))<br><br>
+
+          <button onclick="document.getElementById('x_deriv_input').value = 'sin(x)*(-0.1*cos(x)-cos(y))';
+                           document.getElementById('y_deriv_input').value = 'sin(y)*(-0.1*cos(y)+cos(x))'
+                           resetVectorField()">6</button> x'=sin(x)*(-0.1*cos(x)-cos(y)) <br>&emsp;&ensp; y'=sin(y)*(-0.1*cos(y)+cos(x))<br><br>
+        </div>
+
       </main>
+
+      <div id="canvasDiv"></div>
     </div>
+
+    <hr>
+
     <script src="js/helpers.js"></script>
     <script src="js/flow2D.js"></script>
     <script src="js/script.js"></script>
