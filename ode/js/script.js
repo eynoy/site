@@ -35,6 +35,32 @@ const createVectorField = (min_x, max_x, min_y, max_y, firstOrderDiffEqX, firstO
   return newVectorField;
 };
 
+const recalculatePlotBBoxFromTickMarks = (drawing_canvas, drawing_canvas_div) => {
+  const xTickMarks = document.querySelectorAll('[aria-label="x-axis tick"]')[0].childNodes;
+  const yTickMarks = document.querySelectorAll('[aria-label="y-axis tick"]')[0].childNodes;
+  
+  const xData1 = xTickMarks[0].getBoundingClientRect().x;
+  const xData2 = xTickMarks[1].getBoundingClientRect().x;
+  const yData1 = yTickMarks[0].getBoundingClientRect().y;
+  const yData2 = yTickMarks[1].getBoundingClientRect().y;
+
+  const xData1BPosition = Number(document.querySelectorAll('[aria-label="x-axis tick label"]')[0].childNodes[0].innerHTML.replace("−","-"));
+  const xData2BPosition = Number(document.querySelectorAll('[aria-label="x-axis tick label"]')[0].childNodes[1].innerHTML.replace("−","-"));
+  const yData1BPosition = Number(document.querySelectorAll('[aria-label="y-axis tick label"]')[0].childNodes[0].innerHTML.replace("−","-"));
+  const yData2BPosition = Number(document.querySelectorAll('[aria-label="y-axis tick label"]')[0].childNodes[1].innerHTML.replace("−","-"));
+  const xData1PixelPosition = xTickMarks[0].getBoundingClientRect().x - drawing_canvas_div.getBoundingClientRect().x;
+  const yData1PixelPosition = yTickMarks[0].getBoundingClientRect().y - drawing_canvas_div.getBoundingClientRect().y;
+  
+  const PixelsPerUnitX = Math.abs((xData2 - xData1) / (xData2BPosition - xData1BPosition));
+  const PixelsPerUnitY = Math.abs((yData2 - yData1) / (yData2BPosition - yData1BPosition));
+  console.log(PixelsPerUnitX, PixelsPerUnitY);
+
+  plotBBox.min_x = xData1BPosition - xData1PixelPosition / PixelsPerUnitX;
+  plotBBox.max_x = plotBBox.min_x + drawing_canvas.width  / PixelsPerUnitX;
+  plotBBox.max_y = yData1BPosition + yData1PixelPosition / PixelsPerUnitY;
+  plotBBox.min_y = plotBBox.max_y - drawing_canvas.height  / PixelsPerUnitY;
+};
+
 const mainScreen = async () => {
   canvasWidth = Math.floor(document.body.scrollWidth * 0.60);
   canvasHeight = Math.floor(canvasWidth * 0.66);
@@ -56,20 +82,25 @@ const mainScreen = async () => {
   div.style.minWidth = canvasWidth + "px";
   div.style.width = canvasWidth + "px";
 
+  // Resize Canvas
   const plot_boundbox = document.querySelectorAll('[aria-label="vector"]')[0].getBoundingClientRect();
   const plot_surroundDiv_boundbox = document.getElementsByClassName('interactiveSection')[0].getBoundingClientRect();
 
   const drawing_canvas_div = document.getElementById("canvasDiv");
-  const drawing_canvas = document.createElement("canvas");
-  drawing_canvas.width = drawing_canvas.width = plot_boundbox.width;
+  const drawing_canvas = document.createElement("canvas"); drawing_canvas.id = "drawing_canvas";
+  drawing_canvas.width = plot_boundbox.width;
   drawing_canvas.height = plot_boundbox.height;
   drawing_canvas_div.style.left = (plot_boundbox.x - plot_surroundDiv_boundbox.x) + "px";
   drawing_canvas_div.style.top = (plot_boundbox.y - plot_surroundDiv_boundbox.y) + "px";
 
+  //Figure Out Coordinate BBox
+  recalculatePlotBBoxFromTickMarks(drawing_canvas, drawing_canvas_div);
+
+  // Set pixelBBox
   pixelBBox.min_x = 0;
   pixelBBox.min_y = 0;
-  pixelBBox.max_x = plot_boundbox.width;
-  pixelBBox.max_y = plot_boundbox.height;
+  pixelBBox.max_x = drawing_canvas.width;
+  pixelBBox.max_y = drawing_canvas.height;
   pixelBBox.diag_len = mag(pixelBBox.max_x - pixelBBox.min_x, pixelBBox.max_y - pixelBBox.min_y);
 
   drawing_canvas_div.append(drawing_canvas);
@@ -94,6 +125,13 @@ const mainScreen = async () => {
 const updateGraph = () => {
   ctx.clearRect(0, 0, pixelBBox.max_x, pixelBBox.max_y);
 
+  // Testing Boundary Drawing
+  // drawCircle(0, plotBBox.min_y, 5, "Green");
+  // drawCircle(0, plotBBox.max_y, 5, "Blue");
+
+  // drawCircle(plotBBox.min_x, 0, 5, "Violet");
+  // drawCircle(plotBBox.max_x, 0, 5, "Orange");
+
   for (currentFlow of currentFlows) {
     currentFlow.update();
     currentFlow.draw();
@@ -109,6 +147,11 @@ const resetVectorField = () => {
   currentDiffEqX = Function("x", "y", "return " + xDerivativeInputField.value);
   currentDiffEqY = Function("x", "y", "return " + yDerivativeInputField.value);
 
+  plotBBox.min_x = -10;
+  plotBBox.max_x = 10;
+  plotBBox.min_y = -6;
+  plotBBox.max_y = 6;
+
   const vectorField = createVectorField(plotBBox.min_x,
                                          plotBBox.max_x,
                                          plotBBox.min_y,
@@ -119,6 +162,23 @@ const resetVectorField = () => {
   plot = createPlot(vectorField);
   div.removeChild(div.firstChild);
   div.append(plot);
+
+  const plot_boundbox = document.querySelectorAll('[aria-label="vector"]')[0].getBoundingClientRect();
+  const plot_surroundDiv_boundbox = document.getElementsByClassName('interactiveSection')[0].getBoundingClientRect();
+
+  const drawing_canvas_div = document.getElementById("canvasDiv");
+  const drawing_canvas = document.getElementById("drawing_canvas");
+  drawing_canvas.width = plot_boundbox.width;
+  drawing_canvas.height = plot_boundbox.height;
+  drawing_canvas_div.style.left = (plot_boundbox.x - plot_surroundDiv_boundbox.x) + "px";
+  drawing_canvas_div.style.top = (plot_boundbox.y - plot_surroundDiv_boundbox.y) + "px";
+
+  // Correct Tick Marks
+  recalculatePlotBBoxFromTickMarks(drawing_canvas, drawing_canvas_div);
+
+  // Reset pixelBBox
+  pixelBBox.max_x = drawing_canvas.width;
+  pixelBBox.max_y = drawing_canvas.height;
 };
 
 const createFlowArray = () => {
